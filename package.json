@@ -1,0 +1,36 @@
+{
+  "name": "il.co.foodmenu.app",
+  "displayName": "FoodMenu",
+  "version": "1.0.0",
+  "description": "Find your food!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "android": "cordova run browser"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cordova-android": "^9.1.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-plugin-whitelist": "^1.3.4"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
+    },
+    "platforms": [
+      "browser",
+      "android"
+    ]
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^3.0.0",
+    "request": "^2.88.2"
+  }
+}
