@@ -102,7 +102,7 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
     this._actions.find(a => a.classList.contains('action--nope')).style.opacity = this._nopeOpacityLerp(deltaX);
     this._actions.find(a => a.classList.contains('action--like')).style.opacity = this._likeOpacityLerp(deltaX);
     this._actions.find(a => a.classList.contains('action--superlike')).style.opacity = this._superlikeOpacityLerp(deltaY);
-    event.preventDefault();
+    // event.preventDefault();
   }
 
   _animate(target, opts = {}) {
