@@ -116,14 +116,17 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
         this.style.transition = 'initial';
       });
   }
+
   like(item) {
     return this._animate('translateX(200%)', {next: true})
       .then(_ => this.dispatchEvent(new CustomEvent('swipe', {detail: 'like'})));
   }
+
   nope(item) {
     return this._animate('translateX(-200%)', {next: true})
       .then(_ => this.dispatchEvent(new CustomEvent('swipe', {detail: 'nope'})));
   }
+  
   superlike(item) {
     return this._animate('translateY(-200%)', {next: true})
       .then(_ => this.dispatchEvent(new CustomEvent('swipe', {detail: 'superlike'})));

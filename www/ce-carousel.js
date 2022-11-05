@@ -2,7 +2,7 @@ customElements.define('tinderforbananas-carousel', class extends HTMLElement {
   constructor() {
     super();
     const mo = new MutationObserver(this.updateChildren.bind(this));
-    mo.observe(this, {childList: true});
+    mo.observe(this, { childList: true });
     this.selected = 0;
     this._startDrag = this._startDrag.bind(this);
     this._stopDrag = this._stopDrag.bind(this);
@@ -32,14 +32,15 @@ customElements.define('tinderforbananas-carousel', class extends HTMLElement {
     let deltaX = (event.clientX || event.touches[0].clientX) - this._startX;
     const maxDelta = this._width * (this._images.length - this.selected);
     if (this.selected === 0 && deltaX > 0) deltaX = 0;
-    if (this.selected === this._images.length-1 && deltaX < 0) deltaX = 0;
+    if (this.selected === this._images.length - 1 && deltaX < 0) deltaX = 0;
     this._images.forEach(img => img.style.transform = `translateX(${deltaX}px)`);
-    event.preventDefault();
-    event.stopPropagation();
+    // event.preventDefault();
+    // event.stopPropagation();
   }
 
   _stopDrag(event) {
-    if (!this._dragging) return;
+    if (!this._dragging)
+      return;
     this._dragging = false;
     let deltaX = (event.clientX || event.changedTouches[0].clientX) - this._startX;
     if (Math.abs(deltaX) < 10) return this.dispatchEvent(
@@ -51,13 +52,13 @@ customElements.define('tinderforbananas-carousel', class extends HTMLElement {
       })
     );
     if (this.selected === 0 && deltaX > 0) deltaX = 0;
-    if (this.selected === this._images.length-1 && deltaX < 0) deltaX = 0;
+    if (this.selected === this._images.length - 1 && deltaX < 0) deltaX = 0;
 
     let idxOffset = 0;
-    if (deltaX > this._width/4) idxOffset = 1;
-    if (deltaX < -this._width/4) idxOffset = -1;
+    if (deltaX > this._width / 4) idxOffset = 1;
+    if (deltaX < -this._width / 4) idxOffset = -1;
     this.selected -= idxOffset;
-    
+
     const r1 = this._images[0].getBoundingClientRect();
     this.updateChildren();
     const r2 = this._images[0].getBoundingClientRect();
@@ -75,7 +76,7 @@ customElements.define('tinderforbananas-carousel', class extends HTMLElement {
       .then(_ => {
         this._images.forEach(img => img.style.transform = '');
         return transitionEndPromise(this);
-      }) 
+      })
       .then(_ => this._images.forEach(img => img.style.transition = ''));
 
     event.preventDefault();
@@ -86,10 +87,10 @@ customElements.define('tinderforbananas-carousel', class extends HTMLElement {
     this._images = this.querySelectorAll('.carousel__item');
     if (this._images.length <= 0) return;
     for (let i = 0; i < this._images.length; i++) {
-      this._images[i].style.left = `${100*(i-this.selected)}%`;
+      this._images[i].style.left = `${100 * (i - this.selected)}%`;
       this._images[i].style.transform = '';
     }
-    const last = this._images[this._images.length-1];
+    const last = this._images[this._images.length - 1];
     const rect = last.getBoundingClientRect();
     this._width = rect.width;
   }
