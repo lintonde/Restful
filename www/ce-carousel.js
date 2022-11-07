@@ -23,8 +23,8 @@ customElements.define('tinderforbananas-carousel', class extends HTMLElement {
   _startDrag(event) {
     this._dragging = true;
     this._startX = event.clientX || event.touches[0].clientX;
-    event.preventDefault();
-    event.stopPropagation();
+    // event.preventDefault();
+    // event.stopPropagation();
   }
 
   _drag(event) {

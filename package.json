@@ -31,6 +31,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "node-fetch": "^3.0.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "require": "^0.4.4",
+    "requirejs": "^2.3.6",
+    "woocommerce-api": "^1.4.2"
   }
 }
