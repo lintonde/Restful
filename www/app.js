@@ -1,9 +1,9 @@
 (function () {
   let items = [];  
   if (items.length <= 0) {
-    let isLive = false;
+    let isLive = true;
     let path = (isLive) ? 'https://food-express/api/products' : 'http://localhost:8000/api/products';
-    fetch('http://localhost:8000/api/products')
+    fetch(path)
       .then(response => response.json())
       .then(data => {        
         for (var i = data.length - 1; i >= 0; i--) {
