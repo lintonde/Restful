@@ -1,11 +1,11 @@
 (function () {
-  let items = [];
+  let items = [];  
   if (items.length <= 0) {
-    fetch('data.json')
+    let isLive = false;
+    let path = (isLive) ? 'https://food-express/api/products' : 'http://localhost:8000/api/products';
+    fetch('http://localhost:8000/api/products')
       .then(response => response.json())
-      .then(data => {
-        data = JSON.parse(data);
-        console.log(data);
+      .then(data => {        
         for (var i = data.length - 1; i >= 0; i--) {
           if (data[i]["images"].length > 0) {
             items.push(data[i]);
