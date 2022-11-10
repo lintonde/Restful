@@ -1,8 +1,8 @@
 (function () {
   let items = [];  
   if (items.length <= 0) {
-    let isLive = true;
-    let path = (isLive) ? 'https://food-express/api/products' : 'http://localhost:8000/api/products';
+    let isLive = false;
+    let path = (isLive) ? 'https://food-express.onrender.com/api/products' : 'http://localhost:8000/api/products';
     fetch(path)
       .then(response => response.json())
       .then(data => {        
@@ -13,8 +13,9 @@
         }
         init();
         document.querySelector('.loader').style.display = 'none';
-      })
-      .catch(error => console.log(error));
+      }).catch(error => {
+        console.log(error)
+      });
   }
   const dataProvider = (function* () {
     while (true) {
