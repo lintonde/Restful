@@ -1,7 +1,7 @@
 (function () {
   let items = [];  
   if (items.length <= 0) {
-    let isLive = true;
+    let isLive = false;
     let path = (isLive) ? 'https://food-express/api/products' : 'http://localhost:8000/api/products';
     fetch(path)
       .then(response => response.json())
@@ -81,7 +81,8 @@
   }
 
   function showDetails(event) {
-    const swipelist = document.querySelector('.view--swipelist');
+    return false;
+    /*const swipelist = document.querySelector('.view--swipelist');
     const data = swipelist.querySelector('.item--top').data;
     window.ga && ga('send', 'event', `item-${data.id}`, 'details');
     const details = document.querySelector('.view--details');
@@ -115,8 +116,7 @@
         carousel.style.transform = '';
         carousel.style.transition = '';
         carousel.style.transformOrigin = '';
-      });
-
+      });*/
   }
 
   function hideDetails(event) {
@@ -188,6 +188,4 @@
     hookupButtons();
     installServiceWorker();
   }
-  // document.addEventListener('DOMContentLoaded', init);
-
 })();
