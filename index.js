@@ -84,22 +84,10 @@ app.use((req, res, next) => {
     }
     api._products = {
 
-      get_all: async function () {
+      get_all: async () => {
         return await api.get("products", { per_page: 20 }).then((response) => {
           let items = [];
           for (var i = response.data.length - 1; i >= 0; i--) {
-
-            /*
-              let items = 
-              [
-              {
-                id:0,
-                name: 'avi',
-                price: 50,
-                job:
-              }]
-            */
-
             let imgs = [];
             let item = {};
             item.id = response.data[i]["id"];
@@ -112,51 +100,24 @@ app.use((req, res, next) => {
             item.images = imgs;
             items.push(item);
           }
-          return items;
+          return items; // [{id:0,name: 'avi',price: 50, etc..}]
         }).catch((error) => {
           console.log(error);
         });
       },
 
-      delete_all: async function () {
-        api.get("products").then((response) => {
-          for (var i = response.data.length - 1; i >= 0; i--) {
-            api._products.delete(response.data[i].id);
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-
-      delete: async function (product_id) {
-        api.delete("products/" + product_id, { force: true }).then((response) => {
-          console.log("Deleted:", response.data);
-        }).catch((error) => {
-          console.log("Response Status:", error.response.status);
-          console.log("Response Headers:", error.response.headers);
-          console.log("Response Data:", error.response.data);
-        }).finally(() => { })
-      },
-
-      add: async function (_product) {
-        let product_id = _product.name;
-        api.post("products", _product).then((response) => {
-          console.log("Added: ", response.data);
-        }).catch((error) => {
-          console.log("Response Status:", error.response.status);
-          console.log("Response Headers:", error.response.headers);
-          console.log("Response Data:", error.response.data);
-        }).finally(() => { });
-      },
-
-      get: async function (product_id) {
+      get: async (product_id) => {
         api.get("products/" + product_id).then((response) => {
           console.log(response.data);
         }).catch((error) => {
           console.log(error);
         });
+      },
+
+      get_by_zone: async () => {
+
       }
-    }    
+    }
 
     const writeProductsJson = () => {
       let url = "https://fetch.onrender.com/products";
@@ -180,23 +141,17 @@ app.use((req, res, next) => {
       });
     }
 
-    const getProductsByShippingZone = (zone) => {
-
-    }
-
     app.listen(process.env.PORT || 8000, () => {
       console.log('listen to port 8000');
     });
-    
+
     app.get("/", (req, res) => {
       res.sendFile(__dirname + '/www/index.html');
     });
-    
+
     app.get("/api/products/", (req, res) => {
       // writeProductsJson();
-      //res.json(response);
       api._products.get_all().then((response) => {
-        console.log(response);
         res.json(response);
       });
     });

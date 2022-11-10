@@ -46,7 +46,7 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
     this._updateBindings();
   }
 
-  get selected() {
+  get selected() {    
     return this._selected;
   }
 
