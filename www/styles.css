@@ -355,6 +355,12 @@ tinderforbananas-carousel .carousel__item {
   100% { transform: rotate(360deg); }
 }
 
-.item__details{
-  line-height: 1.6rem;
+.item__details__job{
+  padding-top: 0.5rem;
+  line-height: 1.2rem;
+}
+
+.item__details__name{
+  padding-left: 0 !important;
+  padding-right: 1rem;
 }

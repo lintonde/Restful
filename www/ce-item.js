@@ -57,7 +57,7 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
 
   _updateBindings() {
     this.querySelector('.item__details__name').textContent = `${this.data.name}`;
-    this.querySelector('.item__details__price').textContent = `${'₪' + this.data.price}`;
+    this.querySelector('.item__details__price').textContent = `${'$' + this.data.price}`;
     this.querySelector('.item__details__job').textContent = `${this.data.job.replace(/(<([^>]+)>)/ig, "")}`;
     this.querySelector('picture').style.backgroundImage = `url('${this.data.images[this.selected]}')`;
   }
