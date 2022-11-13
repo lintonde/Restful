@@ -364,3 +364,7 @@ tinderforbananas-carousel .carousel__item {
   padding-left: 0 !important;
   padding-right: 1rem;
 }
+
+tinderforbananas-item.item.item--top{
+  height: 73% !important;
+}

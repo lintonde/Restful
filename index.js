@@ -115,8 +115,26 @@ app.use((req, res, next) => {
       },
 
       get_by_zone: async () => {
-
-      }
+        return await api.get("products", { per_page: 20 }).then((response) => {
+          let items = [];
+          for (var i = response.data.length - 1; i >= 0; i--) {
+            let imgs = [];
+            let item = {};
+            item.id = response.data[i]["id"];
+            item.name = response.data[i]["name"];
+            item.job = response.data[i]["description"];
+            item.price = response.data[i]["regular_price"];
+            if (response.data[i]["images"].length > 0) {
+              imgs.push(response.data[i]["images"][0]["src"])
+            }
+            item.images = imgs;
+            items.push(item);
+          }
+          return items; // [{id:0,name: 'avi',price: 50, etc..}]
+        }).catch((error) => {
+          console.log(error);
+        });
+      },
     }
 
     const writeProductsJson = () => {
