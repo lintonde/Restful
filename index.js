@@ -140,7 +140,7 @@ app.use((req, res, next) => {
     }
 
     const writeProductsJson = () => {
-      let url = "https://fetch.onrender.com/products";
+      let url = "https://food-express.onrender.com/api/products";
       https.get(url, (res) => {
         let body = "";
         res.on("data", (chunk) => {
@@ -168,15 +168,18 @@ app.use((req, res, next) => {
     app.get("/", (req, res) => {
       res.sendFile(__dirname + '/www/index.html');
     });
-
-    app.get("/api/products/", (req, res) => {
-      // writeProductsJson();
+    
+    app.get("/api/products/", (req, res) => {      
       console.log(api._products.items);
       if(!api._products.items.length){
         api._products.get_all().then((response) => {
           res.json(response);
         });
       }
+    });
+
+    app.get("/api/products/write", (req, res) => {      
+      writeProductsJson();
     });
   }
   catch (error) {
