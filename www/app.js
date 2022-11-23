@@ -1,12 +1,12 @@
 (function () {  
-  let items = [];  
+  let items = []; 
   if (items.length <= 0) {
-    console.log(items);
     let isLive = true;
     let path = (isLive) ? 'https://food-express.onrender.com/api/products' : 'http://localhost:8000/api/products';
     fetch(path)
       .then(response => response.json())
-      .then(data => {        
+      .then(data => {     
+        console.log(data);   
         for (var i = data.length - 1; i >= 0; i--) {
           if (data[i]["images"].length > 0) {
             items.push(data[i]);
