@@ -104,7 +104,7 @@ body {
   will-change: transform;
   overflow: hidden;
   position: absolute;
-direction: ltr;
+  direction: rtl;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -296,6 +296,8 @@ tinderforbananas-details {
 .tinderforbananas .item__details__distance {
   font-size: var(--app__font__size--small);
   flex-basis: 100%;
+  text-align: right;
+  direction: rtl;
 }
 .tinderforbananas .item__details__distance {
   color: var(--app__details__distance__color);
@@ -360,11 +362,15 @@ tinderforbananas-carousel .carousel__item {
   line-height: 1.2rem;
 }
 
+.item__details__price{
+  font-weight: bold;
+}
+
 .item__details__name{
-  padding-left: 0 !important;
-  padding-right: 1rem;
+  padding-left: 1rem !important;
+  /* padding-right: 1rem; */
 }
 
 tinderforbananas-item.item.item--top{
-  height: 73% !important;
+  /* height: 73% !important; */
 }

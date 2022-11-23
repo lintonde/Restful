@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  try {
+  try {    
     const api = new WooCommerceRestApi({
       url: "https://restful.co.il",
       consumerKey: 'ck_4ccb70fa08146a01067376bb6e5ecaadc428138d',
@@ -83,10 +83,10 @@ app.use((req, res, next) => {
       }
     }
     api._products = {
-
+      items : [],
       get_all: async () => {
-        return await api.get("products", { per_page: 20 }).then((response) => {
-          let items = [];
+        return await api.get("products", { per_page: 20 }).then((response) => {          
+          console.log(api._products.items);
           for (var i = response.data.length - 1; i >= 0; i--) {
             let imgs = [];
             let item = {};
@@ -98,20 +98,22 @@ app.use((req, res, next) => {
               imgs.push(response.data[i]["images"][0]["src"])
             }
             item.images = imgs;
-            items.push(item);
+            api._products.items.push(item);
           }
-          return items; // [{id:0,name: 'avi',price: 50, etc..}]
+          return api._products.items; // [{id:0,name: 'avi',price: 50, etc..}]
         }).catch((error) => {
           console.log(error);
         });
       },
 
       get: async (product_id) => {
-        api.get("products/" + product_id).then((response) => {
-          console.log(response.data);
-        }).catch((error) => {
-          console.log(error);
-        });
+        if(!api._products.length){
+          api.get("products/" + product_id).then((response) => {
+            console.log(response.data);
+          }).catch((error) => {
+            console.log(error);
+          });
+        }        
       },
 
       get_by_zone: async () => {
@@ -169,9 +171,12 @@ app.use((req, res, next) => {
 
     app.get("/api/products/", (req, res) => {
       // writeProductsJson();
-      api._products.get_all().then((response) => {
-        res.json(response);
-      });
+      console.log(api._products.items);
+      if(!api._products.items.length){
+        api._products.get_all().then((response) => {
+          res.json(response);
+        });
+      }
     });
   }
   catch (error) {

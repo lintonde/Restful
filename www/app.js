@@ -1,6 +1,7 @@
-(function () {
+(function () {  
   let items = [];  
   if (items.length <= 0) {
+    console.log(items);
     let isLive = true;
     let path = (isLive) ? 'https://food-express.onrender.com/api/products' : 'http://localhost:8000/api/products';
     fetch(path)
