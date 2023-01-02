@@ -1,7 +1,7 @@
 (function () {  
   let items = []; 
   if (items.length <= 0) {
-    let isLive = false;
+    let isLive = true;
     let path = (isLive) ? 'https://food-express.onrender.com/api/products' : 'http://localhost:8000/api/products';
     fetch(path)
       .then(response => response.json())
