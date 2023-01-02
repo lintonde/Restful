@@ -63,12 +63,12 @@ body {
 .tinderforbananas {
   position: relative;
   display: flex;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   height: 100%;
   width: calc(var(--device__aspect-ratio) * 100vh);
   max-width: calc(var(--device__aspect-ratio) * 100vh);
   flex-direction: column;
   background-color: var(--app__background__color);
-
   overflow: hidden;
 }
 .tinderforbananas header {
@@ -309,7 +309,8 @@ tinderforbananas-details {
 .tinderforbananas .item__details__distance{
   font-size: var(--app__font__size--small);
   flex-basis: 100%;
-  line-height: 1.35rem;
+  padding-top: 0.5rem;
+  line-height: 1.8rem;
   text-align: right;
   direction: rtl;
 }
@@ -371,11 +372,6 @@ tinderforbananas-carousel .carousel__item {
   100% { transform: rotate(360deg); }
 }
 
-.item__details__job{
-  padding-top: 0.5rem;
-  line-height: 1.2rem;
-}
-
 .item__details__price{
   font-weight: bold;
 }
@@ -383,4 +379,11 @@ tinderforbananas-carousel .carousel__item {
 .item__details__name{
   padding-left: 1rem !important;
   /* padding-right: 1rem; */
+}
+
+/* mobile view */
+@media (max-width: 600px) {
+  .item__details__job{    
+    line-height: 1.2rem !important;
+  }
 }
