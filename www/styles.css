@@ -126,6 +126,18 @@ body {
   padding-bottom: 80%;
 }
 
+.btns{
+
+  position: absolute;
+  z-index: 999;
+  display: flex;
+  background-color: rgba(255,255,255,0.85);
+  flex-direction: row;
+  top:0;
+  left: 0;
+
+}
+
 .tinderforbananas .view--details .item__details,
 .tinderforbananas .view--swipelist .item__details {
   display: flex;

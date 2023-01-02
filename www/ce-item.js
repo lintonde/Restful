@@ -57,6 +57,9 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
 
   _updateBindings() {
     this.querySelector('.item__details__wolt').href = `${this.data.wolt}`;
+    this.querySelector('.item__details__tenbis').href = `${this.data.tenbis}`;
+    this.querySelector('.item__details__phone').href = `${this.data.phone}`;
+    this.querySelector('.item__details__location').href = `${this.data.location}`;    
     this.querySelector('.item__details__name').textContent = `${this.data.name}`;
     this.querySelector('.item__details__price').textContent = `${'₪' + this.data.price}`;    
     this.querySelector('.item__details__job').textContent = `${this.data.job.replace(/(<([^>]+)>)/ig, "")}`;

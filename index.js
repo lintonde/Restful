@@ -93,7 +93,10 @@ app.use((req, res, next) => {
             item.name = response.data[i]["name"];
             item.job = response.data[i]["description"];
             item.price = response.data[i]["regular_price"];
-            item.wolt = 'https://restful.co.il'; //response.data[i]["wolt"];
+            item.wolt = 'https://wolt.co.il'; //response.data[i]["wolt"];
+            item.phone = 'tel:0507606660'; //response.data[i]["wolt"];
+            item.tenbis = 'https://www.10bis.co.il/next/'; //response.data[i]["tenbis"];
+            item.location = 'https://www.google.com/maps/place/%D7%A4%D7%99%D7%A6%D7%94+%D7%A8%D7%95%D7%96%D7%9E%D7%A8%D7%99%D7%9F+%7C+%D7%A4%D7%99%D7%A6%D7%94+%D7%9B%D7%A9%D7%A8%D7%94+%D7%91%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91%E2%80%AD%E2%80%AD/@32.0664064,34.7830238,15z/data=!4m2!3m1!1s0x0:0x1ff261d82d28f753';
             if (response.data[i]["images"].length > 0) {
               imgs.push(response.data[i]["images"][0]["src"])
             }
@@ -172,7 +175,6 @@ app.use((req, res, next) => {
     app.get("/api/products/", (req, res) => {            
       api._products.items = [];
       api._products.get_all().then((response) => {
-        console.log(response);
         res.json(response);
       });
     });
