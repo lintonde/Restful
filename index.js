@@ -93,6 +93,7 @@ app.use((req, res, next) => {
             item.name = response.data[i]["name"];
             item.job = response.data[i]["description"];
             item.price = response.data[i]["regular_price"];
+            item.wolt = 'https://restful.co.il'; //response.data[i]["wolt"];
             if (response.data[i]["images"].length > 0) {
               imgs.push(response.data[i]["images"][0]["src"])
             }
@@ -171,6 +172,7 @@ app.use((req, res, next) => {
     app.get("/api/products/", (req, res) => {            
       api._products.items = [];
       api._products.get_all().then((response) => {
+        console.log(response);
         res.json(response);
       });
     });

@@ -29,6 +29,7 @@ customElements.define('tinderforbananas-details', class extends HTMLElement {
     this.querySelector('.item__details__name').textContent = this.data.name;
     this.querySelector('.item__details__price').textContent = this.data.price;
     this.querySelector('.item__details__job').textContent = this.data.job;
+    // this.querySelector('.item__details__wolt').textContent = this.data.wolt;
     this.querySelector('.item__details__distance').textContent = `${this.data.distance} miles away`;
     this.querySelector('.description').textContent = this.data.description;
   }
