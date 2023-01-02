@@ -103,6 +103,7 @@ body {
   box-shadow: var(--app__shadow);
   will-change: transform;
   overflow: hidden;
+  min-height: 60%;
   position: absolute;
   direction: rtl;
   display: flex;
@@ -123,7 +124,7 @@ body {
   width: 100%;
   opacity: 0;
   pointer-events: none;
-  padding-bottom: 80%;
+  padding-bottom: 100%;
 }
 
 .btns{
@@ -308,6 +309,7 @@ tinderforbananas-details {
 .tinderforbananas .item__details__distance{
   font-size: var(--app__font__size--small);
   flex-basis: 100%;
+  line-height: 1.35rem;
   text-align: right;
   direction: rtl;
 }
