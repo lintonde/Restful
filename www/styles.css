@@ -134,8 +134,9 @@ body {
   display: flex;
   background-color: rgba(255,255,255,0.85);
   flex-direction: row;
-  bottom:90px;
-  left: 60px;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
 
 }
 
