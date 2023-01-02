@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  try {    
+  try {
     const api = new WooCommerceRestApi({
       url: "https://restful.co.il",
       consumerKey: 'ck_4ccb70fa08146a01067376bb6e5ecaadc428138d',
@@ -83,10 +83,9 @@ app.use((req, res, next) => {
       }
     }
     api._products = {
-      items : [],
+      items: [],
       get_all: async () => {
-        return await api.get("products", { per_page: 10 }).then((response) => {          
-          console.log(api._products.items);
+        return await api.get("products", { per_page: 20 }).then((response) => {
           for (var i = response.data.length - 1; i >= 0; i--) {
             let imgs = [];
             let item = {};
@@ -107,13 +106,13 @@ app.use((req, res, next) => {
       },
 
       get: async (product_id) => {
-        if(!api._products.length){
+        if (!api._products.length) {
           api.get("products/" + product_id).then((response) => {
             console.log(response.data);
           }).catch((error) => {
             console.log(error);
           });
-        }        
+        }
       },
 
       get_by_zone: async () => {
@@ -168,17 +167,14 @@ app.use((req, res, next) => {
     app.get("/", (req, res) => {
       res.sendFile(__dirname + '/www/index.html');
     });
-    
-    app.get("/api/products/", (req, res) => {      
-      console.log(api._products.items);
-      if(!api._products.items.length){
-        api._products.get_all().then((response) => {
-          res.json(response);
-        });
-      }
+
+    app.get("/api/products/", (req, res) => {
+      api._products.get_all().then((response) => {
+        res.json(response);
+      });
     });
 
-    app.get("/api/products/write", (req, res) => {      
+    app.get("/api/products/write", (req, res) => {
       writeProductsJson();
     });
   }
