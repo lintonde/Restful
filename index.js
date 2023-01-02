@@ -85,7 +85,7 @@ app.use((req, res, next) => {
     api._products = {
       items : [],
       get_all: async () => {
-        return await api.get("products", { per_page: 20 }).then((response) => {          
+        return await api.get("products", { per_page: 10 }).then((response) => {          
           console.log(api._products.items);
           for (var i = response.data.length - 1; i >= 0; i--) {
             let imgs = [];
