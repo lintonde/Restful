@@ -168,7 +168,8 @@ app.use((req, res, next) => {
       res.sendFile(__dirname + '/www/index.html');
     });
 
-    app.get("/api/products/", (req, res) => {
+    app.get("/api/products/", (req, res) => {            
+      api._products.items = [];
       api._products.get_all().then((response) => {
         res.json(response);
       });
