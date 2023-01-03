@@ -6,7 +6,6 @@
     fetch(path)
       .then(response => response.json())
       .then(data => {     
-        console.log(data);   
         for (var i = data.length - 1; i >= 0; i--) {
           if (data[i]["images"].length > 0) {
             items.push(data[i]);
@@ -84,7 +83,7 @@
 
   function showDetails(event) {
     return false;
-    /*const swipelist = document.querySelector('.view--swipelist');
+    const swipelist = document.querySelector('.view--swipelist');
     const data = swipelist.querySelector('.item--top').data;
     window.ga && ga('send', 'event', `item-${data.id}`, 'details');
     const details = document.querySelector('.view--details');
@@ -118,7 +117,7 @@
         carousel.style.transform = '';
         carousel.style.transition = '';
         carousel.style.transformOrigin = '';
-      });*/
+      });
   }
 
   function hideDetails(event) {

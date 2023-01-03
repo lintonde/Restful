@@ -270,7 +270,7 @@ body {
   fill: var(--app__action--like__color);
 }
 .tinderforbananas .control--superlike svg {
-  stroke: var(--app__action--superlike__color);
+  /* stroke: var(--app__action--superlike__color); */
   fill: var(--app__action--superlike__color);
 }
 .tinderforbananas .control--undo svg {
