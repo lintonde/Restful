@@ -254,8 +254,8 @@ body {
   stroke-linejoin: round;
 }
 .tinderforbananas .control--big {
-  width: calc(var(--app__control--big__size) * 100vh);
-  height: calc(var(--app__control--big__size) * 100vh);
+  width: calc(var(--app__control--big__size) * 85vh);
+  height: calc(var(--app__control--big__size) * 85vh);
 }
 .tinderforbananas .control--small {
   width: calc(var(--app__control--small__size) * 100vh);
@@ -385,6 +385,7 @@ tinderforbananas-carousel .carousel__item {
 /* mobile view */
 @media (max-width: 600px) {
   .item__details__job{    
-    line-height: 1.2rem !important;
+    line-height: 1.5rem !important;
+    /* padding-top: 0.2rem !important; */
   }
 }
