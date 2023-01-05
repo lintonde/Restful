@@ -114,8 +114,8 @@ body {
   position: relative;
   width: 100%;
   flex-grow: 0;
-  background-size: cover;
-  background-position: 50% 50%;
+  background-size: contain;
+  /* background-position: 50% 50%; */
   background-repeat: no-repeat;
 }
 .tinderforbananas .view--swipelist .item picture:before {
@@ -132,6 +132,7 @@ body {
   position: absolute;
   z-index: 999;
   display: flex;
+  border-bottom: solid 1px #ddd;
   background-color: rgba(255,255,255,0.85);
   flex-direction: row;
   bottom: 0;
