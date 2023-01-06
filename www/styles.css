@@ -127,18 +127,26 @@ body {
   padding-bottom: 100%;
 }
 
-.btns{
-
+.btns {
   position: absolute;
   z-index: 999;
   display: flex;
+  padding-bottom: 1rem;
   border-bottom: solid 1px #ddd;
   background-color: rgba(255,255,255,0.85);
   flex-direction: row;
-  bottom: -5px;
+  bottom: -1rem;
   width: 100%;
   justify-content: center;
+}
 
+.btns a {
+  font-size: 0.5rem;
+  font-weight: bold;
+  line-height: 0;
+  text-decoration: none;
+  text-align: center;
+  display: inline-grid;
 }
 
 .tinderforbananas .view--details .item__details,
