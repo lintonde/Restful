@@ -23,8 +23,8 @@ customElements.define('tinderforbananas-carousel', class extends HTMLElement {
   _startDrag(event) {
     this._dragging = true;
     this._startX = event.clientX || event.touches[0].clientX;
-    // event.preventDefault();
-    // event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   _drag(event) {
@@ -34,8 +34,8 @@ customElements.define('tinderforbananas-carousel', class extends HTMLElement {
     if (this.selected === 0 && deltaX > 0) deltaX = 0;
     if (this.selected === this._images.length - 1 && deltaX < 0) deltaX = 0;
     this._images.forEach(img => img.style.transform = `translateX(${deltaX}px)`);
-    // event.preventDefault();
-    // event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   _stopDrag(event) {

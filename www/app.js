@@ -121,6 +121,7 @@
   }
 
   function hideDetails(event) {
+    return false;
     const swipelist = document.querySelector('.view--swipelist');
     const details = document.querySelector('.view--details');
     const detailsText1 = details.querySelector('.item__details');
