@@ -103,7 +103,7 @@ body {
   box-shadow: var(--app__shadow);
   will-change: transform;
   overflow: hidden;
-  min-height: 72%;
+  min-height: 73%;
   position: absolute;
   direction: rtl;
   display: flex;
@@ -124,16 +124,13 @@ body {
   width: 100%;
   opacity: 0;
   pointer-events: none;
-  padding-bottom: 83%;
+  padding-bottom: 80%;
 }
 
 .btns {  
-  z-index: 999;
   display: flex;
   border-top: solid 1px #ddd;
-  background-color: rgba(255,255,255,1);
   flex-direction: row;
-  bottom: 0rem;
   width: 100%;
   justify-content: center;
 }
