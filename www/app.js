@@ -184,7 +184,7 @@
     next.data = dataProvider.next().value;
     const details = document.querySelector('tinderforbananas-details');
     details.addEventListener('dismiss', hideDetails);
-    copyControls();
+    //copyControls();
     adjustSwipeItems();
     window.addEventListener('resize', adjustSwipeItems);
     hookupButtons();

@@ -79,10 +79,13 @@ body {
   margin-bottom: calc(var(--app__header__margin) * 100vh);
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
+
+
+
 .tinderforbananas header p {
   margin: 0;
 }
@@ -103,7 +106,7 @@ body {
   box-shadow: var(--app__shadow);
   will-change: transform;
   overflow: hidden;
-  min-height: 72%;
+  min-height: 80%;
   position: absolute;
   direction: rtl;
   display: flex;
@@ -114,8 +117,8 @@ body {
   position: relative;
   width: 100%;
   flex-grow: 0;
-  background-size: contain;
-  /* background-position: 50% 50%; */
+  background-size: cover;
+  background-position: 50% 50%;
   background-repeat: no-repeat;
 }
 .tinderforbananas .view--swipelist .item picture:before {
@@ -124,7 +127,13 @@ body {
   width: 100%;
   opacity: 0;
   pointer-events: none;
-  padding-bottom: 100%;
+  padding-bottom:100%;
+}
+
+button.control.control--big.control--like {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .btns {
@@ -135,7 +144,7 @@ body {
   border-bottom: solid 1px #ddd;
   background-color: rgba(255,255,255,1);
   flex-direction: row;
-  bottom: 0rem;
+  bottom: -1rem;
   width: 100%;
   justify-content: center;
 }
@@ -248,8 +257,8 @@ body {
 }
 .tinderforbananas .control {
   border-radius: 50%;
-  background-color: var(--app__control__color);
-  box-shadow: var(--app__shadow);
+  background-color: transparent; /*var(--app__control__color);*/
+  /* box-shadow: var(--app__shadow); */
   border: 0;
   padding: 0;
 }
