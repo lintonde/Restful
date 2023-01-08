@@ -1,28 +1,26 @@
 customElements.define('tinderforbananas-item', class extends HTMLElement {
-  static get observedAttributes() {
-    return ['inmovable'];
+  static get observedAttributes() { 
+    return ['inmovable']; 
   }
 
   constructor() {
     super();
-    this._dragging = false;
+    this._dragging = false; 
     this.startX = 0;
     this.startY = 0;
-
     this._startDrag = this._startDrag.bind(this);
     this._stopDrag = this._stopDrag.bind(this);
     this._drag = this._drag.bind(this);
     this._data = {};
     this._selected = 0;
-
   }
 
   connectedCallback() {
     this.addEventListener('mousedown', this._startDrag);
-    document.addEventListener('mouseup', this._stopDrag);
-    document.addEventListener('mousemove', this._drag);
+    document.addEventListener('mouseup', this._stopDrag); 
+    document.addEventListener('mousemove', this._drag); 
     this.addEventListener('touchstart', this._startDrag);
-    document.addEventListener('touchend', this._stopDrag);
+    document.addEventListener('touchend', this._stopDrag); 
     document.addEventListener('touchmove', this._drag);
 
     this._actions = Array.from(this.querySelectorAll('.action'));
@@ -31,10 +29,10 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
 
   onResize() {
     this._gBCR = this.getBoundingClientRect();
-    this._rotationLerp = lerp(0, this._gBCR.width / 2, 0, 10, { noClamp: true });
-    this._nopeOpacityLerp = lerp(0, -this._gBCR.width / 3, 0, 1);
-    this._likeOpacityLerp = lerp(0, this._gBCR.width / 3, 0, 1);
-    this._superlikeOpacityLerp = lerp(-this._gBCR.height / 8, -this._gBCR.height / 8 - this._gBCR.height / 3, 0, 1);
+    this._rotationLerp = lerp(0, this._gBCR.width/2, 0, 10, {noClamp: true});
+    this._nopeOpacityLerp = lerp(0, -this._gBCR.width/3, 0, 1);
+    this._likeOpacityLerp = lerp(0, this._gBCR.width/3, 0, 1);
+    this._superlikeOpacityLerp = lerp(-this._gBCR.height/8, -this._gBCR.height/8 - this._gBCR.height/3, 0, 1);
   }
 
   get data() {
@@ -46,7 +44,7 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
     this._updateBindings();
   }
 
-  get selected() {
+  get selected() {    
     return this._selected;
   }
 
@@ -59,10 +57,10 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
     this.querySelector('.item__details__wolt').href = `${this.data.wolt}`;
     this.querySelector('.item__details__tenbis').href = `${this.data.tenbis}`;
     this.querySelector('.item__details__phone').href = `${this.data.phone}`;
-    this.querySelector('.item__details__location').href = `${this.data.location}`;
-    this.querySelector('.item__details__page').href = `${this.data.page}`;
+    this.querySelector('.item__details__location').href = `${this.data.location}`;    
+    this.querySelector('.item__details__page').href = `${this.data.page}`;    
     this.querySelector('.item__details__name').textContent = `${this.data.name}`;
-    this.querySelector('.item__details__price').textContent = `${'₪' + this.data.price}`;
+    this.querySelector('.item__details__price').textContent = `${'₪' + this.data.price}`;    
     this.querySelector('.item__details__job').textContent = `${this.data.job.replace(/(<([^>]+)>)/ig, "")}`;
     this.querySelector('picture').style.backgroundImage = `url('${this.data.images[this.selected]}')`;
   }
@@ -92,7 +90,7 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
     if (this._superlikeOpacityLerp(deltaY) >= 1) return this.superlike();
     if (this._nopeOpacityLerp(deltaX) >= 1) return this.nope();
     if (this._likeOpacityLerp(deltaX) >= 1) return this.like();
-    if (deltaX === 0 && deltaY === 0) return this.dispatchEvent(new CustomEvent('details', { detail: this.data, bubbles: true }));
+    if (deltaX === 0 && deltaY === 0) return this.dispatchEvent(new CustomEvent('details', {detail: this.data, bubbles: true}));
     return this._animate('initial');
   }
 
@@ -123,17 +121,17 @@ customElements.define('tinderforbananas-item', class extends HTMLElement {
   }
 
   like(item) {
-    return this._animate('translateX(200%)', { next: true })
-      .then(_ => this.dispatchEvent(new CustomEvent('swipe', { detail: 'like' })));
+    return this._animate('translateX(200%)', {next: true})
+      .then(_ => this.dispatchEvent(new CustomEvent('swipe', {detail: 'like'})));
   }
 
   nope(item) {
-    return this._animate('translateX(-200%)', { next: true })
-      .then(_ => this.dispatchEvent(new CustomEvent('swipe', { detail: 'nope' })));
+    return this._animate('translateX(-200%)', {next: true})
+      .then(_ => this.dispatchEvent(new CustomEvent('swipe', {detail: 'nope'})));
   }
-
+  
   superlike(item) {
-    return this._animate('translateY(-200%)', { next: true })
-      .then(_ => this.dispatchEvent(new CustomEvent('swipe', { detail: 'superlike' })));
+    return this._animate('translateY(-200%)', {next: true})
+      .then(_ => this.dispatchEvent(new CustomEvent('swipe', {detail: 'superlike'})));
   }
 });

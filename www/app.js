@@ -3,6 +3,8 @@
   if (items.length <= 0) {
     let isLive = true;
     let path = (isLive) ? 'https://food-express.onrender.com/api/products' : 'http://localhost:8000/api/products';
+    const top = document.querySelector('.item--top');
+    top.classList.add('hidden');
     fetch(path)
       .then(response => response.json())
       .then(data => {     
@@ -55,7 +57,8 @@
   }
 
   function init() {
-    const top = document.querySelector('.item--top');    
+    const top = document.querySelector('.item--top');
+    top.classList.remove('hidden');
     top.data = dataProvider.next().value;
     top.addEventListener('swipe', updateCards);    
     const next = document.querySelector('.item--next');

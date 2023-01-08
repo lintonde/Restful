@@ -136,6 +136,11 @@ button.control.control--big.control--like {
   left: 0;
 }
 
+.logo{
+  width: 75%;
+  text-align: center;
+}
+
 .btns {
   position: absolute;
   z-index: 999;
@@ -276,8 +281,8 @@ button.control.control--big.control--like {
   height: calc(var(--app__control--big__size) * 85vh);
 }
 .tinderforbananas .control--small {
-  width: calc(var(--app__control--small__size) * 100vh);
-  height: calc(var(--app__control--small__size) * 100vh);
+  width: calc(var(--app__control--small__size) * 80vh);
+  height: calc(var(--app__control--small__size) * 80vh);
 }
 .tinderforbananas .control--nope svg {
   stroke: var(--app__action--nope__color);
