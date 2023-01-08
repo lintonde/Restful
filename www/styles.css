@@ -141,10 +141,10 @@ button.control.control--big.control--like {
   z-index: 999;
   display: flex;
   padding-bottom: 1rem;
-  border-bottom: solid 1px #ddd;
+  border-top: solid 1px #ddd;
   background-color: rgba(255,255,255,1);
   flex-direction: row;
-  bottom: -1rem;
+  bottom: 0rem;
   width: 100%;
   justify-content: center;
 }
@@ -163,7 +163,7 @@ button.control.control--big.control--like {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  align-content: center;
+  align-content: baseline;
   flex-grow: 1;
   padding: calc(var(--app__item__details__padding) * 100vh);
 }
