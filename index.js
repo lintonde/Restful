@@ -180,6 +180,13 @@ app.use((req, res, next) => {
       });
     });
 
+    app.get("/api/products/local", (req, res) => {            
+      api._products.items = [];
+      api._stores._products.get_all().then((response) => {
+        res.json(response);
+      });
+    });
+
     app.get("/api/products/write", (req, res) => {
       writeProductsJson();
     });
