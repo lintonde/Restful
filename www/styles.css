@@ -106,7 +106,7 @@ body {
   box-shadow: var(--app__shadow);
   will-change: transform;
   overflow: hidden;
-  min-height: 80%;
+  min-height: 85%;
   position: absolute;
   direction: rtl;
   display: flex;
