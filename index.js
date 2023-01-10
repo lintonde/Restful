@@ -170,6 +170,10 @@ app.use((req, res, next) => {
     });
 
     app.get("/", (req, res) => {
+      res.sendFile(__dirname + '/www/soon.html');
+    });
+    
+    app.get("/app", (req, res) => {
       res.sendFile(__dirname + '/www/index.html');
     });
 
