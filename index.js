@@ -7,7 +7,7 @@ const app = express();
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 app.use(express.static(__dirname + '/www/'));
 app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:8000', 'https://food-express.onrender.com'];
+  const allowedOrigins = ['http://localhost/', 'https://food-express.onrender.com'];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
@@ -165,16 +165,16 @@ app.use((req, res, next) => {
       });
     }
 
-    app.listen(process.env.PORT || 8000, () => {
-      console.log('listen to port 8000');
+    app.listen(process.env.PORT || 80, () => {
+      console.log('listen to port 80');
     });
 
     app.get("/", (req, res) => {
-      res.sendFile(__dirname + '/www/soon.html');
+      res.sendFile(__dirname + '/www/index.html');
     });
     
     app.get("/app", (req, res) => {
-      res.sendFile(__dirname + '/www/index.html');
+      res.sendFile(__dirname + '/www/app.html');
     });
 
     app.get("/api/products/", (req, res) => {            
