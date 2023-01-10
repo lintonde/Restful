@@ -13,7 +13,7 @@
   ];
 
   self.oninstall = event => event.waitUntil(
-    caches.open(`tinderforbananas-${VERSION}`)
+    caches.open(`restful-${VERSION}`)
       .then(cache => cache.addAll(files))
   );
 
@@ -23,7 +23,7 @@
         Promise.all(
           cacheNames
             .map(c => c.split('-'))
-            .filter(c => c[0] === 'tinderforbananas')
+            .filter(c => c[0] === 'restful')
             .filter(c => c[1] !== VERSION)
             .map(c => caches.delete(c.join('-')))
         )

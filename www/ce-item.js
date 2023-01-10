@@ -1,4 +1,4 @@
-customElements.define('tinderforbananas-item', class extends HTMLElement {
+customElements.define('restful-item', class extends HTMLElement {
   static get observedAttributes() { 
     return ['inmovable']; 
   }
