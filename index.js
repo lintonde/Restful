@@ -1,10 +1,21 @@
 'use strict';
-const express = require('express');
+
+// imports
 const https = require('https');
 const fs = require('fs');
+const express = require('express');
+const { google } = require('googleapis');
+const { OAuth2Client } = require('google-auth-library');
+const passport = require('passport');
+const OAuth2Strategy = require('passport-oauth2').Strategy;
+const bodyParser = require('body-parser');
 const request = require('request');
+const cors = require('cors');
+const { authorize } = require('passport');
 const app = express();
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
+
+// app
 app.use(express.static(__dirname + '/www/'));
 app.use((req, res, next) => {
   const allowedOrigins = ['http://localhost/', 'https://food-express.onrender.com'];
@@ -17,19 +28,144 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
   return next();
 });
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(cors());
 
+// Restful API
 (async () => {
   try {
-    const api = new WooCommerceRestApi({
+    const google_api = {
+      auth: function() {
+        const fs = require('fs');
+        const path = require('path');
+        const process = require('process');
+        const { authenticate } = require('@google-cloud/local-auth');
+        const { google } = require('googleapis');
+
+        // If modifying these scopes, delete token.json.
+        const SCOPES = [
+          'https://www.googleapis.com/auth/spreadsheets'
+        ];
+        // The file token.json stores the user's access and refresh tokens, and is
+        // created automatically when the authorization flow completes for the first
+        // time.
+        const TOKEN_PATH = path.join(process.cwd(), 'token.json');
+        const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
+
+        /**
+         * Reads previously authorized credentials from the save file.
+         *
+         * @return {Promise<OAuth2Client|null>}
+         */
+         function loadSavedCredentialsIfExist() {
+          try {
+            const content =  fs.readFile(TOKEN_PATH);
+            const credentials = JSON.parse(content);
+            return google.auth.fromJSON(credentials);
+          } catch (err) {
+            return null;
+          }
+        }
+
+        /**
+         * Serializes credentials to a file comptible with GoogleAUth.fromJSON.
+         *
+         * @param {OAuth2Client} client
+         * @return {Promise<void>}
+         */
+         function saveCredentials(client) {
+          const content =  fs.readFile(CREDENTIALS_PATH);
+          const keys = JSON.parse(content);
+          const key = keys.installed || keys.web;
+          const payload = JSON.stringify({
+            type: 'authorized_user',
+            client_id: key.client_id,
+            client_secret: key.client_secret,
+            refresh_token: client.credentials.refresh_token,
+          });
+           fs.writeFile(TOKEN_PATH, payload);
+        }
+
+        /**
+         * Load or request or authorization to call APIs.
+         *
+         */
+         function authorize() {
+          let client =  loadSavedCredentialsIfExist();
+          console.log(client);
+          return client;
+          if (client) {
+            return client;
+          }
+          client =  authenticate({
+            scopes: SCOPES,
+            keyfilePath: CREDENTIALS_PATH,
+          });
+          if (client.credentials) {
+             saveCredentials(client);
+          }
+          console.log(client);
+          return client;
+        }
+
+        return  authorize();
+      },
+      addTracking:  () => {
+       const auth = authorize();
+        if (auth) {
+          const title = "test1"
+          const service = google.sheets({ version: 'v4', auth });
+          const resource = {
+            properties: {
+              title,
+            },
+          };
+          try {
+            console.log(service);
+            const spreadsheet = servic.create({
+              resource,
+              fields: 'spreadsheetId',
+            });
+            console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
+            return spreadsheet.data.spreadsheetId;
+          } catch (err) {
+            // TODO (developer) - Handle exception
+            throw err;
+          }
+        }
+      }
+    };
+
+    // objects to use
+    const woo_api = new WooCommerceRestApi({
       url: "https://restful.co.il",
       consumerKey: 'ck_4ccb70fa08146a01067376bb6e5ecaadc428138d',
       consumerSecret: 'cs_9f9fa79ac2d46cd96377f6604f9bfef79b9d7e11',
       version: "wc/v3"
     });
-    api._stores = {
+    woo_api._stores = {
 
       get_all_stores: async function () {
         let url = 'https://restful.co.il/wp-json/wcfmmp/v1/store-vendors'; // all
+        request.get({
+          url: url,
+          json: true,
+          headers: { 'User-Agent': 'request' }
+        }, (err, res, data) => {
+          if (err) {
+            console.log('יש לך ארור יחנטריש:', err);
+          } else if (res.statusCode !== 200) {
+            console.log('Status:', res.statusCode);
+          } else {
+            console.log(data);
+            return data;
+          }
+        })
+      },
+
+      get_all_stores_local: async function (lat, long, radius) {
+        let url = 'https://restful.co.il/wp-json/wcfmmp/v1/store-vendors?wcfmmp_radius_lat=' + lat + '&wcfmmp_radius_long=' + long + '';
         request.get({
           url: url,
           json: true,
@@ -82,10 +218,10 @@ app.use((req, res, next) => {
         })
       }
     }
-    api._products = {
+    woo_api._products = {
       items: [],
       get_all: async () => {
-        return await api.get("products", { per_page: 20 }).then((response) => {
+        return await woo_api.get("products", { per_page: 20 }).then((response) => {
           for (var i = response.data.length - 1; i >= 0; i--) {
             let imgs = [];
             let item = {};
@@ -102,45 +238,23 @@ app.use((req, res, next) => {
               imgs.push(response.data[i]["images"][0]["src"])
             }
             item.images = imgs;
-            api._products.items.push(item);
+            woo_api._products.items.push(item);
           }
-          return api._products.items; // [{id:0,name: 'avi',price: 50, etc..}]
+          return woo_api._products.items; // [{id:0,name: 'avi',price: 50, etc..}]
         }).catch((error) => {
           console.log(error);
         });
       },
 
       get: async (product_id) => {
-        if (!api._products.length) {
-          api.get("products/" + product_id).then((response) => {
+        if (!woo_api._products.length) {
+          woo_api.get("products/" + product_id).then((response) => {
             console.log(response.data);
           }).catch((error) => {
             console.log(error);
           });
         }
-      },
-
-      get_by_zone: async () => {
-        return await api.get("products", { per_page: 20 }).then((response) => {
-          let items = [];
-          for (var i = response.data.length - 1; i >= 0; i--) {
-            let imgs = [];
-            let item = {};
-            item.id = response.data[i]["id"];
-            item.name = response.data[i]["name"];
-            item.job = response.data[i]["description"];
-            item.price = response.data[i]["regular_price"];
-            if (response.data[i]["images"].length > 0) {
-              imgs.push(response.data[i]["images"][0]["src"])
-            }
-            item.images = imgs;
-            items.push(item);
-          }
-          return items; // [{id:0,name: 'avi',price: 50, etc..}]
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
+      }
     }
 
     const writeProductsJson = () => {
@@ -164,29 +278,45 @@ app.use((req, res, next) => {
         console.error(error.message);
       });
     }
-
     app.listen(process.env.PORT || 80, () => {
       console.log('listen to port 80');
     });
 
+    // router
     app.get("/", (req, res) => {
       res.sendFile(__dirname + '/www/index.html');
     });
-    
+
     app.get("/app", (req, res) => {
       res.sendFile(__dirname + '/www/app.html');
     });
 
-    app.get("/api/products/", (req, res) => {            
-      api._products.items = [];
-      api._products.get_all().then((response) => {
+    app.get("/api/products/", (req, res) => {
+      woo_api._products.items = [];
+      woo_api._products.get_all().then((response) => {
         res.json(response);
       });
     });
 
-    app.get("/api/products/local", (req, res) => {            
-      api._products.items = [];
-      api._stores._products.get_all().then((response) => {
+    app.get("/api/track/", async (req, res) => {
+      const clientName = req.query['clientName'];
+      const clickType = req.query['clickType'];
+      let output = 'clientName is ' + clientName + ', and clickType is ' + clickType;
+      let client;
+      google_api.auth().then(function(result) {
+        console.log(result);
+        client = result;
+     })
+      const isTracked = google_api.addTracking(client);
+      console.log(client.SCOPES);
+    });
+
+    app.get("/api/products/local", (req, res) => {
+      woo_api._products.items = [];
+      let lat = '0' //'32.1643219';
+      let long = '0' //'34.8727212';
+      let radius = '1';
+      woo_api._stores.get_all_stores_local(lat, long, radius).then((response) => {
         res.json(response);
       });
     });
