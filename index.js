@@ -1,22 +1,22 @@
 'use strict';
 
 // imports
-const https = require('https');
-const fs = require('fs');
-const express = require('express');
-const { google } = require('googleapis');
-const { OAuth2Client } = require('google-auth-library');
-const passport = require('passport');
-const OAuth2Strategy = require('passport-oauth2').Strategy;
-const bodyParser = require('body-parser');
-const request = require('request');
-const cors = require('cors');
-const { authorize } = require('passport');
+import { get as _get } from 'https';
+import { writeFile } from 'fs';
+import { express } from 'express';
+import { google } from 'googleapis';
+import { OAuth2Client } from 'google-auth-library';
+import passport from 'passport';
+import { Strategy as OAuth2Strategy } from 'passport-oauth2';
+import { json as _json, urlencoded } from 'body-parser';
+import { get as __get } from 'request';
+import cors from 'cors';
+import { authorize } from 'passport';
 const app = express();
-const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
+import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
 
 // app
-app.use(express.static(__dirname + '/www/'));
+app.use(app.static(__dirname + '/www/'));
 app.use((req, res, next) => {
   const allowedOrigins = ['http://localhost/', 'https://food-express.onrender.com'];
   const origin = req.headers.origin;
@@ -28,8 +28,8 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
   return next();
 });
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(_json()); // support json encoded bodies
+app.use(urlencoded({ extended: true })); // support encoded bodies
 app.use(cors());
 
 // Restful API
@@ -148,7 +148,7 @@ app.use(cors());
 
       get_all_stores: async function () {
         let url = 'https://restful.co.il/wp-json/wcfmmp/v1/store-vendors'; // all
-        request.get({
+        __get({
           url: url,
           json: true,
           headers: { 'User-Agent': 'request' }
@@ -166,7 +166,7 @@ app.use(cors());
 
       get_all_stores_local: async function (lat, long, radius) {
         let url = 'https://restful.co.il/wp-json/wcfmmp/v1/store-vendors?wcfmmp_radius_lat=' + lat + '&wcfmmp_radius_long=' + long + '';
-        request.get({
+        __get({
           url: url,
           json: true,
           headers: { 'User-Agent': 'request' }
@@ -184,7 +184,7 @@ app.use(cors());
 
       get_products: async function (store_id) {
         let url = 'https://restful.co.il/wp-json/wcfmmp/v1/store-vendors/' + store_id + '/products';
-        request.get({
+        __get({
           url: url,
           json: true,
           headers: { 'User-Agent': 'request' }
@@ -202,7 +202,7 @@ app.use(cors());
 
       get: async function (store_id) {
         let url = 'https://restful.co.il/wp-json/wcfmmp/v1/store-vendors/' + store_id;
-        request.get({
+        __get({
           url: url,
           json: true,
           headers: { 'User-Agent': 'request' }
@@ -259,7 +259,7 @@ app.use(cors());
 
     const writeProductsJson = () => {
       let url = "https://food-express.onrender.com/api/products";
-      https.get(url, (res) => {
+      _get(url, (res) => {
         let body = "";
         res.on("data", (chunk) => {
           body += chunk;
@@ -268,7 +268,7 @@ app.use(cors());
         res.on("end", () => {
           try {
             let json = JSON.stringify(body);
-            fs.writeFile('www/data.json', json, 'utf8', () => { return; });
+            writeFile('www/data.json', json, 'utf8', () => { return; });
           } catch (error) {
             console.error(error.message);
           };
