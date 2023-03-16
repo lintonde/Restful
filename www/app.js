@@ -1,7 +1,7 @@
 (function () {  
   let items = []; 
   if (items.length <= 0) {
-    let isLive = false;
+    let isLive = true;
     let path = (isLive) ? 'https://food-express.onrender.com/api/products' : 'http://localhost/api/products';
     const top = document.querySelector('.item--top');
     top.classList.add('hidden');
