@@ -3,6 +3,7 @@ var router = express.Router();
 var {
   authorize,
   appendEvent,
+  listMajors,
   checkIfClientExists,
   createClient,
   getSpreadSheetForRest,
@@ -17,7 +18,6 @@ router.get("/", function (req, res, next) {
 });
 
 // ראווט ליצירת מסעדה חדשה במערכת  מקבל שם מסעדה ושומר בקובץ את האיידי של הספרדשיט
-
 router.get("/createNewClient", async (req, res) => {
   /**
    * Create a google spreadsheet
@@ -34,7 +34,6 @@ router.get("/createNewClient", async (req, res) => {
 });
 
 // מקבל שם מסעדה אם לא קיימת מייצר אותה ושומר איוונט הכולל קליקטייפ וטיימטאמפ
-
 router.get("/newEvent", async (req, res) => {
   try {
     const { rest, clickType } = req.query;
@@ -53,7 +52,6 @@ router.get("/newEvent", async (req, res) => {
 });
 
 // ראוטר לסיכום חודשי עובר על כל קובץ הקליינטס ומוציא דוח לכל אחד בנפרד עפ סוגי קליקים.
-
 router.get("/finish", async (req, res, next) => {
   const client = await authorize();
   const clients = await fs.readFile(CLIENTS_PATH);

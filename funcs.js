@@ -192,6 +192,7 @@ const getSpreadSheetForRest = async (auth, spreadsheetId) => {
 module.exports = {
   authorize,
   create,
+  listMajors,
   appendEvent,
   checkIfClientExists,
   createClient,

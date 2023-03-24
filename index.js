@@ -4,11 +4,11 @@
 const https = require('https');
 const fs = require('fs');
 const express = require('express');
+// const mongo = require('mongo_functions');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const request = require('request');
 const cors = require('cors');
-const { authorize } = require('passport');
 const app = express();
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
@@ -32,10 +32,6 @@ app.use(cors());
 // Restful API
 (async () => {
   try {
-    const google_api = {
-     
-    };
-
     // objects to use
     const woo_api = new WooCommerceRestApi({
       url: "https://restful.co.il",
@@ -176,10 +172,7 @@ app.use(cors());
       }).on("error", (error) => {
         console.error(error.message);
       });
-    }
-    app.listen(process.env.PORT || 80, () => {
-      console.log('listen to port 80');
-    });
+    }    
 
     // router
     app.get("/", (req, res) => {
@@ -197,19 +190,6 @@ app.use(cors());
       });
     });
 
-    app.get("/api/track/", async (req, res) => {
-      const clientName = req.query['clientName'];
-      const clickType = req.query['clickType'];
-      let output = 'clientName is ' + clientName + ', and clickType is ' + clickType;
-      let client;
-      google_api.auth().then(function(result) {
-        console.log(result);
-        client = result;
-     })
-      const isTracked = google_api.addTracking(client);
-      console.log(client.SCOPES);
-    });
-
     app.get("/api/products/local", (req, res) => {
       woo_api._products.items = [];
       let lat = '0' //'32.1643219';
@@ -222,6 +202,10 @@ app.use(cors());
 
     app.get("/api/products/write", (req, res) => {
       writeProductsJson();
+    });
+
+    app.listen(process.env.PORT || 80, () => {
+      console.log('listen to port 80');
     });
   }
   catch (error) {

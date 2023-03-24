@@ -1,3 +1,4 @@
 /credentials.json
-/google_api.js
-/google_api_funcs.js
+/clients.json
+/mongo_functions.js
+/mongo.js
