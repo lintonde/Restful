@@ -3,11 +3,10 @@ var router = express.Router();
 var {
   authorize,
   appendEvent,
-  listMajors,
   checkIfClientExists,
   createClient,
   getSpreadSheetForRest,
-} = require("funcs");
+} = require("./funcs");
 const fs = require("fs").promises;
 const path = require("path");
 const CLIENTS_PATH = path.join(process.cwd(), "clients.json");

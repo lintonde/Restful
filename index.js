@@ -4,10 +4,10 @@
 const https = require('https');
 const fs = require('fs');
 const express = require('express');
-// const mongo = require('mongo_functions');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const request = require('request');
+const mongo = require("./mongo"); 
 const cors = require('cors');
 const app = express();
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
@@ -172,7 +172,7 @@ app.use(cors());
       }).on("error", (error) => {
         console.error(error.message);
       });
-    }    
+    }
 
     // router
     app.get("/", (req, res) => {
@@ -203,6 +203,8 @@ app.use(cors());
     app.get("/api/products/write", (req, res) => {
       writeProductsJson();
     });
+
+    
 
     app.listen(process.env.PORT || 80, () => {
       console.log('listen to port 80');
