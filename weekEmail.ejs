@@ -1,19 +1,45 @@
 <body style="direction: rtl; text-align: right;">
-    <p>שבוע טוב <%= o.nameHeb %> היקרים, הנה הקליקים שהיו בכרטיס ביקור הדיגיטלי בשבוע האחרון</p>
+    <p>שבוע טוב <%= o.nameHeb %> היקרים, <br>הנה הקליקים שהיו בכרטיס ביקור הדיגיטלי בשבוע האחרון:</p>
     <ul>
+        <%if (o.call > 0) { %>
         <li>כפתור חיוג: <%= o.call %></li>
+        <%}%>
+        <%if (o.wolt > 0) { %>
         <li>כפתור וולט:  <%= o.wolt %> </li>
+        <%}%>
+        <%if (o.tenBis > 0) { %>
         <li>כפתור תן ביס:  <%= o.tenBis %> </li>
+        <%}%>
+        <%if (o.mishlocha > 0) { %>
         <li> כפתור משלוחה:  <%= o.mishlocha %> </li>
+        <%}%>
+        <%if (o.google > 0) { %>
         <li>כפתור גוגל:  <%= o.google %> </li>
+        <%}%>
+        <%if (o.easy > 0) { %>
         <li>כפתור איזי:  <%= o.easy %> </li>
+        <%}%>
+        <%if (o.facebook > 0) { %>
         <li>כפתור פייסבוק:  <%= o.facebook %> </li>
+        <%}%>
+        <%if (o.instagram > 0) { %>
         <li>כפתור אינסטגרם:  <%= o.instagram %> </li>
+        <%}%>
+        <%if (o.zapRest > 0) { %>
         <li>כפתור זאפ-רסט:  <%= o.zapRest %> </li>
+        <%}%>
+        <%if (o.veganFriendly > 0) { %>
         <li>כפתור ויגן פרינדלי:  <%= o.veganFriendly %> </li>
+        <%}%>
+        <%if (o.tripAdvisor > 0) { %>
         <li>כפתור טריפ אדוויזר:  <%= o.tripAdvisor %> </li>
+        <%}%>
+        <%if (o.ontapo > 0) { %>
         <li>כפתור אונטופו:  <%= o.ontapo %> </li>
+        <%}%>
+        <%if (o.waze > 0) { %>
         <li>כפתור ווייז:  <%= o.waze %> </li>
+        <%}%>
     </ul>
-    <p>המשך יום טוב 😊</p>
+    <p>המשך יום טוב 😊<br>אבי</p>
 </body>
