@@ -1,12 +1,3 @@
-node_modules
-credentials.json
-clients.json
-mongo_functions.js
-mongo.js
-token.json
-key3.json
-funcs.js
-
-# dotenv environment variables file
-.env
-.env.test
+/node_modules
+/sensitive
+/.env
