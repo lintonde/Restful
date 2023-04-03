@@ -1,8 +1,8 @@
+require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = process.env.MONGO_URI;
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
-
 const SCOPES = ["https://www.googleapis.com/auth/gmail.send"];
 const path = require("path");
 const key = JSON.parse(process.env.CREDENTIALS);
