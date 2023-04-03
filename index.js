@@ -5,7 +5,6 @@ require('dotenv').config();
 const https = require('https');
 const fs = require('fs').promises;
 const express = require('express');
-var { authorize, appendEvent, checkIfClientExists, createClient, getSpreadSheetForRest } = require("./funcs");
 const { finishMongo, newMongoEvent, newMongoRest, weekMongo, sendWeekMail, allRests } = require("./mongo_functions");
 const bodyParser = require('body-parser');
 const request = require('request');
@@ -393,9 +392,7 @@ app.use(cors());
     });
 
     app.listen(process.env.PORT || 80, () => {
-      console.log("port:" + process.env.PORT);
-      console.log("woo key: " + process.env.CONSUMER_KEY);
-      console.log("woo key: " + process.env.MONGO_URI);      
+      console.log("Live...");
     });
   }
   catch (error) {
