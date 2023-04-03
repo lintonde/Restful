@@ -253,6 +253,7 @@ const finishMongo = async (rest) => {
   client.close();
   return oToSent;
 };
+
 // נותן תוצאות שבוע קודם - מייצר אובייקט לשליחה
 const weekMongo = async (rest) => {
   console.log("rest ", rest);
