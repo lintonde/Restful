@@ -394,7 +394,8 @@ app.use(cors());
 
     app.listen(process.env.PORT || 8000, () => {
       console.log("port:" + process.env.PORT);
-      console.log("woo key: " + process.env.CONSUMER_KEY);      
+      console.log("woo key: " + process.env.CONSUMER_KEY);
+      console.log("woo key: " + process.env.MONGO_URI);      
     });
   }
   catch (error) {
