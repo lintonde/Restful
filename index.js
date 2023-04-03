@@ -392,7 +392,7 @@ app.use(cors());
       res.send('thanks');
     });
 
-    app.listen(process.env.PORT || 8000, () => {
+    app.listen(process.env.PORT || 80, () => {
       console.log("port:" + process.env.PORT);
       console.log("woo key: " + process.env.CONSUMER_KEY);
       console.log("woo key: " + process.env.MONGO_URI);      
