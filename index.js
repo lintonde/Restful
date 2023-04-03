@@ -392,8 +392,8 @@ app.use(cors());
       res.send('thanks');
     });
 
-    app.listen(process.env.PORT || 80, () => {
-      console.log('listen to port 80');
+    app.listen(8000, () => {
+      console.log(process.env.PORT);
     });
   }
   catch (error) {
