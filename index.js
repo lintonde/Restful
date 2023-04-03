@@ -393,7 +393,8 @@ app.use(cors());
     });
 
     app.listen(process.env.PORT || 8000, () => {
-      console.log(process.env.PORT);
+      console.log("port:" + process.env.PORT);
+      console.log("woo key: " + process.env.CONSUMER_KEY);      
     });
   }
   catch (error) {
