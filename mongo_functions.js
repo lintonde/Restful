@@ -476,8 +476,7 @@ const url = oAuth2Client.generateAuthUrl({
 });
 console.log(url)
 */
-  const code =
-    "4/0AVHEtk5LBTWSbk51fQIXcKNTCZC1W5Z1QVwNKpTy2qz3Y8dgGCTy6VVsFksNLq9HeMc-nQ";
+  const code = process.env.CODE;
 
   /*
 oAuth2Client.getToken(code).then(({ tokens }) => {
