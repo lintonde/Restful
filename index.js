@@ -392,7 +392,7 @@ app.use(cors());
       res.send('thanks');
     });
 
-    app.listen(8000, () => {
+    app.listen(process.env.PORT || 8000, () => {
       console.log(process.env.PORT);
     });
   }
