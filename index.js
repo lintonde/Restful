@@ -14,7 +14,7 @@ const app = express();
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
 // app
-app.use(express.static(__dirname + '/www/'));
+app.use(express.static(__dirname));
 app.use((req, res, next) => {
   const allowedOrigins = ['http://localhost/', 'https://food-express.onrender.com'];
   const origin = req.headers.origin;
@@ -26,13 +26,16 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
   return next();
 });
+app.set('views', __dirname);
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cors());
 
 // Restful API
 (async () => {
-  try {      
+  try {
     const woo_api = new WooCommerceRestApi({
       url: "https://restful.co.il",
       consumerKey: process.env.CONSUMER_KEY,
@@ -357,9 +360,7 @@ app.use(cors());
     // });
 
     app.get("/api/newRest", async (req, res) => {
-      const shop = req.query.shop;
-      const result = await newMongoRest(shop);
-      res.send(result);
+      res.render(__dirname + '/restful.ejs');
     });
 
     app.get("/api/newMongoEvent", async (req, res) => {
@@ -368,18 +369,18 @@ app.use(cors());
       res.send(result);
     });
 
-    app.get("/api/mongoFinish", async (req, res) => {
-      const rest = req.query.rest;
-      const oToSend = await finishMongo(rest);
-      res.send(oToSend);
-    });
+    // app.get("/api/mongoFinish", async (req, res) => {
+    //   const rest = req.query.rest;
+    //   const oToSend = await finishMongo(rest);
+    //   res.send(oToSend);
+    // });
 
-    app.post('/sendRest', async (req, res) => {
+    app.post('/api/sendRest', async (req, res) => {
       const { title, titleHeb, email } = req.body
-      console.log(req.body)
       if (title && titleHeb && email) {
         const result = await newMongoRest(req.body);
-        res.send("Shop succefuly entered to DB")
+        res.render('links', { result });
+        //res.send("פתח טאב חדש והעתק את הקישור הבא והוסף פרמטר איוונט מהרשימה" + "<br>" + "<p>" + " https://food-express.onrender.com/api/newMongoEvent?rest=" + result + "&event=בחר מהרשימה" + "</p><br><p> call | wolt | tenBis | mishlocha | google | easy | facebook | instagram | zapRest | veganFriendly | tripAdvisor | ontapo | waze</p><br><p>לאחר בניה של הקישור הנדרש יש להוסיף על כל כפתור בכרטיס ביקור של הלקוח בנפרד</p>")
       }
       else
         res.send("missing details")

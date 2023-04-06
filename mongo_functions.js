@@ -26,10 +26,10 @@ const newMongoRest = async (shop) => {
     .collection("Shops")
     .insertOne({ name: shop.title, nameHeb: shop.titleHeb, email: shop.email });
   client.close();
+  return shop.title;
 };
 
 // מייצר איוונט חדש למסעדה. מקבל שם מסעדה וסוג קליק
-
 const newMongoEvent = async (event, rest) => {
   const now = new Date().getTime();
   const client = new MongoClient(uri, {
@@ -530,7 +530,6 @@ oAuth2Client.getToken(code).then(({ tokens }) => {
 };
 
 //עובר על כל המסעדות מוציא את השם ושולח אחד אחד לוויקמונגו
-
 const allRests = async () => {
   const client = new MongoClient(uri, {
     useNewUrlParser: true,
@@ -548,6 +547,7 @@ const allRests = async () => {
     await sendWeekMail(o);
   }
 };
+
 module.exports = {
   finishMongo,
   newMongoEvent,

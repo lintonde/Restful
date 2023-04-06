@@ -1,18 +1,52 @@
 <meta charset="UTF-8" />
+
 <head>
-  <link rel="stylesheet" href="/style/main.css" />
+  <style>
+    body {
+      margin: auto;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    img{
+      margin-top: 2rem;;
+
+    }
+
+    .main_container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+    }
+
+    h1 {
+      margin-top: 40px;
+    }
+
+    input {
+      width: 400px;
+      font-size: 18px;
+      padding: 5px;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
 </head>
-<body>
+
+<body dir="rtl">
   <div class="main_container">
-    <h1>Good luck Avi</h1>
-
-    <form name="newRest" method="post" action="/sendRest">
-      <input type="text" name="title" placeholder="Restaurant name:" />
-      <input type="text" name="titleHeb" placeholder="Restaurant name in hebrew:" />
-      <input type="email" name="email" placeholder="Restaurant Email:" />
-      <input type="submit" value="Save"/>
-
-
+    <img src="https://i0.wp.com/restful.co.il/wp-content/uploads/2022/11/color_logo_white_bg.png?resize=100%2C100&ssl=1" alt="">
+    <h1>הקמת לקוח לספירת קליקים</h1>
+    <form name="newRest" method="post" action="/api/sendRest">
+      <input type="text" name="title" required placeholder="שם העסק באנגלית" />
+      <input type="text" name="titleHeb" required placeholder="שם העסק בעברית" />
+      <input type="email" name="email" required placeholder="מייל לשליחת דוחות" />
+      <input type="submit" value="שמירה" />
     </form>
   </div>
 </body>
