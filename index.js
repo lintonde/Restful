@@ -15,6 +15,7 @@ const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
 // app
 app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/www/'));
 app.use((req, res, next) => {
   const allowedOrigins = ['http://localhost/', 'https://food-express.onrender.com'];
   const origin = req.headers.origin;
