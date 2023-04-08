@@ -8,9 +8,6 @@ const path = require("path");
 const key = JSON.parse(process.env.CREDENTIALS);
 const key2 = JSON.parse(process.env.KEY);
 const fs = require("fs");
-// The file token.json stores the user's access and refresh tokens, and is
-// created automatically when the authorization flow completes for the first
-// time.
 const MailComposer = require("nodemailer/lib/mail-composer");
 const ejs = require("ejs");
 
@@ -29,7 +26,6 @@ const newMongoRest = async (shop) => {
   return shop.title;
 };
 
-// מייצר איוונט חדש למסעדה. מקבל שם מסעדה וסוג קליק
 const newMongoEvent = async (event, rest) => {
   const now = new Date().getTime();
   const client = new MongoClient(uri, {
@@ -59,7 +55,7 @@ const newMongoEvent = async (event, rest) => {
   client.close();
   return result;
 };
-// נותן תוצאות של חודש קודם
+
 const finishMongo = async (rest) => {
   const now = new Date();
   const month = now.getMonth();
@@ -254,7 +250,6 @@ const finishMongo = async (rest) => {
   return oToSent;
 };
 
-// נותן תוצאות שבוע קודם - מייצר אובייקט לשליחה
 const weekMongo = async (rest) => {
   console.log("rest ", rest);
   const now = new Date().getTime();
@@ -529,7 +524,6 @@ oAuth2Client.getToken(code).then(({ tokens }) => {
   console.log(messageId);
 };
 
-//עובר על כל המסעדות מוציא את השם ושולח אחד אחד לוויקמונגו
 const allRests = async () => {
   const client = new MongoClient(uri, {
     useNewUrlParser: true,
@@ -549,10 +543,7 @@ const allRests = async () => {
 };
 
 module.exports = {
-  finishMongo,
   newMongoEvent,
   newMongoRest,
-  weekMongo,
-  sendWeekMail,
   allRests
 };

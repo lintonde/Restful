@@ -5,7 +5,7 @@ require('dotenv').config();
 const https = require('https');
 const fs = require('fs').promises;
 const express = require('express');
-const { finishMongo, newMongoEvent, newMongoRest, weekMongo, sendWeekMail, allRests } = require("./mongo_functions");
+const { newMongoEvent, newMongoRest, allRests } = require("./mongo_functions");
 const bodyParser = require('body-parser');
 const request = require('request');
 const path = require("path");
