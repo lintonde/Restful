@@ -540,6 +540,7 @@ const allRests = async () => {
     const o = await weekMongo(name.name);
     await sendWeekMail(o);
   }
+  await client.close();
 };
 
 module.exports = {
